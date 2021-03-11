@@ -58,9 +58,9 @@ def dict_to_device(dictionary, device):
     return dictionary
 
 
-def prob_topk(input, topk):
-    values, indices = torch.topk(input, topk)
-    probs = torch.zeros(3, 5).scatter_(1, indices, values)
+def prob_topk(x, topk):
+    values, indices = torch.topk(x, topk)
+    probs = torch.zeros(x.shape, dtype=x.dtype, device=x.device).scatter_(1, indices, values)
     probs = torch.softmax(probs, dim=-1)
     return probs
 

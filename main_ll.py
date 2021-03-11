@@ -145,7 +145,7 @@ if __name__ == "__main__":
                     probs = probs.to(DEVICE)
                     probs = utils.prob_topk(probs, args.top)
                     output = torch.zeros(target.shape, device=DEVICE)
-                    for cluster in range(n_models + 1):
+                    for cluster in range(n_models):
                         m_output = models[cluster](inputs)
                         output += (m_output * probs[:, cluster].unsqueeze(-1))
 
