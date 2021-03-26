@@ -60,7 +60,7 @@ class DKTDataset(Dataset):
     def _fit_norm(self, user_perf):
         data = [d for d in user_perf.values()]
         mu, std = norm.fit(data)
-        mu_levels = [mu / self.n_levels - self.n_levels / 2 + 0.5 + i * self.mu_itv for i in range(self.n_levels)]
+        mu_levels = [mu - (self.n_levels - 1) * self.mu_itv / 2 + i * self.mu_itv for i in range(self.n_levels)]
         std_levels = [np.sqrt(std ** 2 / self.n_levels) for _ in range(self.n_levels)]
         return mu_levels, std_levels
 
